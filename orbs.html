@@ -1,0 +1,732 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inside Your Little Mind | INNHSIDE OUT</title>
+
+  <style>
+    
+.home-button {
+  position: absolute;
+  top: 22px;
+  left: 22px;
+  z-index: 5;
+  display: inline-block;
+  padding: 11px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 30px;
+  color: white;
+  background: rgba(30, 20, 55, 0.65);
+  backdrop-filter: blur(10px);
+  text-decoration: none;
+  font-size: 0.8rem;
+  transition: 0.25s ease;
+}
+
+.home-button:hover {
+  background: white;
+  color: #302047;
+  transform: translateY(-2px);
+}
+
+    @font-face {
+      font-family: "Carton Six";
+      src: url("carton-six/Carton_Six.ttf") format("truetype");
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #100b1c;
+      color: white;
+      font-family: "Trebuchet MS", Arial, sans-serif;
+      overflow-x: hidden;
+    }
+
+    button,
+    textarea {
+      font: inherit;
+    }
+
+    /* PAGE 1: WELCOME */
+
+    .orb-welcome {
+      min-height: 100vh;
+      height: 100svh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: #100b1c;
+    }
+
+    .welcome-background {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .welcome-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 28px;
+      padding: 24px;
+    }
+
+    .welcome-title {
+      font-family: "Carton Six", sans-serif;
+      color: white;
+      font-size: clamp(2.7rem, 8vw, 7rem);
+      font-weight: 400;
+      line-height: 1.15;
+      text-shadow: 0 3px 18px rgba(0, 0, 0, 0.55);
+    }
+
+    .enter-button {
+      pointer-events: auto;
+      cursor: pointer;
+      padding: 14px 27px;
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      border-radius: 40px;
+      color: white;
+      background: rgba(255, 255, 255, 0.16);
+      backdrop-filter: blur(10px);
+      letter-spacing: 1px;
+      font-size: 0.85rem;
+      transition: 0.25s ease;
+    }
+
+    .enter-button:hover {
+      background: white;
+      color: #302047;
+      transform: translateY(-3px);
+    }
+
+    /* PAGE 2: THE ORB UNIVERSE */
+
+    .orb-universe {
+      min-height: 100vh;
+      min-height: 100svh;
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      background-color: #171027;
+      background-image:
+        linear-gradient(rgba(12, 8, 27, 0.25), rgba(12, 8, 27, 0.4)),
+        url("orbslegit.jpg");
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+
+    .universe-heading {
+      position: absolute;
+      top: 35px;
+      left: 20px;
+      right: 20px;
+      z-index: 3;
+      text-align: center;
+      pointer-events: none;
+    }
+
+    .universe-heading h2 {
+      font-family: "Carton Six", sans-serif;
+      font-size: clamp(2rem, 5vw, 4rem);
+      font-weight: 400;
+      color: white;
+      text-shadow: 0 3px 16px rgba(0, 0, 0, 0.65);
+    }
+
+    .universe-heading p {
+      max-width: 550px;
+      margin: 10px auto 0;
+      font-size: clamp(0.8rem, 2vw, 1rem);
+      line-height: 1.7;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
+    }
+
+    .orb-field {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+
+    .emotion-orb {
+      position: absolute;
+      left: var(--left);
+      top: var(--top);
+      width: var(--size);
+      height: var(--size);
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.75);
+      cursor: pointer;
+      opacity: 0.9;
+      background:
+        radial-gradient(
+          circle at 30% 25%,
+          rgba(255, 255, 255, 0.95),
+          transparent 19%
+        ),
+        radial-gradient(
+          circle at 35% 30%,
+          var(--light),
+          var(--orb-color) 48%,
+          var(--dark)
+        );
+      box-shadow:
+        0 0 12px var(--glow),
+        0 0 28px var(--glow),
+        inset -7px -9px 18px rgba(0, 0, 0, 0.22),
+        inset 5px 5px 15px rgba(255, 255, 255, 0.35);
+      animation: orb-float var(--duration) ease-in-out infinite alternate;
+      animation-delay: var(--delay);
+      transition:
+        box-shadow 0.25s ease,
+        opacity 0.25s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .emotion-orb:hover,
+    .emotion-orb:focus-visible {
+      opacity: 1;
+      z-index: 2;
+      box-shadow:
+        0 0 20px var(--glow),
+        0 0 45px var(--glow),
+        0 0 70px var(--glow),
+        inset 0 0 15px rgba(255, 255, 255, 0.55);
+      outline: 2px solid white;
+      outline-offset: 4px;
+    }
+
+    @keyframes orb-float {
+      0% {
+        transform: translate3d(-12px, -18px, 0) scale(0.94);
+      }
+      50% {
+        transform: translate3d(18px, 14px, 0) scale(1.06);
+      }
+      100% {
+        transform: translate3d(-5px, 28px, 0) scale(1);
+      }
+    }
+
+    .universe-footer {
+      position: absolute;
+      bottom: 22px;
+      left: 15px;
+      right: 15px;
+      z-index: 3;
+      text-align: center;
+      font-size: 0.75rem;
+      line-height: 1.6;
+      color: white;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 1);
+      pointer-events: none;
+    }
+
+    /* REFLECTION FORM */
+
+    .reflection-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 10;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      background: rgba(12, 7, 26, 0.72);
+      backdrop-filter: blur(12px);
+    }
+
+    .reflection-overlay.is-open {
+      display: flex;
+    }
+
+    .reflection-card {
+      position: relative;
+      width: min(100%, 510px);
+      max-height: 90vh;
+      max-height: 90svh;
+      overflow-y: auto;
+      padding: 32px;
+      border: 1px solid rgba(255, 255, 255, 0.55);
+      border-radius: 28px;
+      background: linear-gradient(
+        145deg,
+        rgba(55, 36, 83, 0.97),
+        rgba(25, 19, 48, 0.98)
+      );
+      box-shadow: 0 0 45px rgba(184, 134, 255, 0.2);
+      animation: card-appear 0.3s ease both;
+    }
+
+    @keyframes card-appear {
+      from {
+        opacity: 0;
+        transform: translateY(15px) scale(0.97);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .close-button {
+      position: absolute;
+      top: 13px;
+      right: 17px;
+      width: 38px;
+      height: 38px;
+      border: none;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      cursor: pointer;
+      font-size: 1.5rem;
+    }
+
+    .selected-orb {
+      width: 65px;
+      height: 65px;
+      margin: 0 auto 16px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      background: radial-gradient(
+        circle at 30% 25%,
+        white,
+        var(--selected-light),
+        var(--selected-color) 65%,
+        var(--selected-dark)
+      );
+      box-shadow: 0 0 25px var(--selected-glow);
+    }
+
+    .reflection-card h3 {
+      font-family: "Carton Six", sans-serif;
+      font-size: clamp(1.8rem, 6vw, 2.7rem);
+      font-weight: 400;
+      text-align: center;
+      margin-bottom: 9px;
+    }
+
+    .reflection-intro {
+      text-align: center;
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: #e6ddf5;
+      margin-bottom: 24px;
+    }
+
+    .reflection-card label {
+      display: block;
+      margin: 18px 0 9px;
+      font-size: 0.9rem;
+      font-weight: bold;
+      line-height: 1.5;
+    }
+
+    .reflection-card textarea {
+      display: block;
+      width: 100%;
+      min-height: 100px;
+      padding: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 14px;
+      outline: none;
+      resize: vertical;
+      color: white;
+      background: rgba(255, 255, 255, 0.08);
+      line-height: 1.6;
+    }
+
+    .reflection-card textarea::placeholder {
+      color: #c9bedb;
+    }
+
+    .reflection-card textarea:focus {
+      border-color: #e5c5ff;
+      box-shadow: 0 0 0 3px rgba(229, 197, 255, 0.12);
+    }
+
+    .privacy-note {
+      margin-top: 15px;
+      color: #d2c6e4;
+      font-size: 0.76rem;
+      line-height: 1.6;
+    }
+
+    .submit-button,
+    .return-button {
+      display: block;
+      width: 100%;
+      margin-top: 22px;
+      padding: 14px 18px;
+      border: none;
+      border-radius: 30px;
+      background: #ead6ff;
+      color: #302044;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.2s ease;
+    }
+
+    .submit-button:hover,
+    .return-button:hover {
+      background: white;
+      transform: translateY(-2px);
+    }
+
+    /* COMFORTING NOTE */
+
+    .thank-you-note {
+      display: none;
+      text-align: center;
+    }
+
+    .thank-you-note.is-visible {
+      display: block;
+    }
+
+    .note-sparkle {
+      font-size: 2.4rem;
+      margin: 10px 0;
+    }
+
+    .thank-you-note h3 {
+      margin-bottom: 15px;
+    }
+
+    .thank-you-note p {
+      color: #f0e7fa;
+      font-size: 0.95rem;
+      line-height: 1.9;
+      margin-top: 12px;
+    }
+
+    .reflection-form.is-hidden {
+      display: none;
+    }
+
+    @media (max-width: 600px) {
+      .universe-heading {
+        top: 25px;
+      }
+
+      .universe-heading p {
+        max-width: 340px;
+      }
+
+      .reflection-card {
+        padding: 27px 21px;
+      }
+
+      .emotion-orb {
+        opacity: 0.92;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- PAGE 1: WELCOME -->
+
+  <section class="orb-welcome" id="welcome">
+    
+<a href="index.html" class="home-button">
+  ← back to homepage :D
+</a>
+
+    <img
+      src="one.jpg"
+      alt=""
+      class="welcome-background"
+      aria-hidden="true"
+    >
+
+    <div class="welcome-content">
+      <h1 class="welcome-title">
+        welcome into your little mind :p
+      </h1>
+
+      <button
+        class="enter-button"
+        type="button"
+        onclick="document.getElementById('universe').scrollIntoView({behavior:'smooth'})"
+      >
+        ENTER YOUR LITTLE UNIVERSE ✦
+      </button>
+    </div>
+  </section>
+
+
+  <!-- PAGE 2: FLOATING EMOTION ORBS -->
+
+  <section class="orb-universe" id="universe">
+
+    <div class="universe-heading">
+      <h2>a little piece of you ✧</h2>
+      <p>
+        Find an orb that speaks to you. There is no right or wrong choice.
+        Pick the one you feel drawn to, then let your thoughts find their words.
+      </p>
+    </div>
+
+    <div class="orb-field" id="orbField" aria-label="Choose a floating emotion orb">
+      <!-- JavaScript creates the floating orbs here. -->
+    </div>
+
+    <div class="universe-footer">
+      Take your time. Share only what feels comfortable. 💗
+    </div>
+
+  </section>
+
+
+  <!-- REFLECTION POP-UP -->
+
+  <div
+    class="reflection-overlay"
+    id="reflectionOverlay"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="reflectionTitle"
+  >
+    <div class="reflection-card">
+
+      <button
+        type="button"
+        class="close-button"
+        id="closeButton"
+        aria-label="Close reflection"
+      >
+        &times;
+      </button>
+
+      <div class="reflection-form" id="reflectionForm">
+
+        <div class="selected-orb" id="selectedOrb"></div>
+
+        <h3 id="reflectionTitle">you chose this little light</h3>
+
+        <p class="reflection-intro">
+          Maybe something about this orb feels familiar.
+          Let's make a little space for your thoughts. 🌷
+        </p>
+
+        <form id="thoughtForm">
+
+          <label for="whyInput">
+            1. What made you choose this orb?
+          </label>
+
+          <textarea
+            id="whyInput"
+            name="why"
+            maxlength="1000"
+            placeholder="Something about it caught my attention because..."
+            required
+          ></textarea>
+
+          <label for="feelingInput">
+            2. How do you relate to it, or how are you feeling right now?
+          </label>
+
+          <textarea
+            id="feelingInput"
+            name="feeling"
+            maxlength="1500"
+            placeholder="Right now, I feel... / I relate to this orb because..."
+            required
+          ></textarea>
+
+          <p class="privacy-note">
+            💌 Share only what you feel comfortable writing. This demo
+            does not save or send your answers. Closing or refreshing
+            the page clears your reflection.
+          </p>
+
+          <button class="submit-button" type="submit">
+            SEND MY LITTLE REFLECTION ♡
+          </button>
+
+        </form>
+      </div>
+
+
+      <!-- SHOWN AFTER SUBMISSION -->
+
+      <div class="thank-you-note" id="thankYouNote" aria-live="polite">
+        <div class="note-sparkle">✧･ﾟ: *✧･ﾟ:* 💗</div>
+
+        <h3>thank you for letting yourself feel.</h3>
+
+        <p>
+          Whatever brought you here today, you deserve patience and
+          understanding. You don't have to have every feeling figured out.
+        </p>
+
+        <p>
+          Your emotions are part of your story, but they are not the
+          whole story. Give yourself permission to pause, breathe,
+          ask for support, and take things one step at a time.
+        </p>
+
+        <p>
+          You don't need to be okay every second to deserve kindness.
+          Be gentle with yourself, little by little. 🌷
+        </p>
+
+        <button class="return-button" id="returnButton" type="button">
+          BACK TO MY LITTLE UNIVERSE ✨
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+
+  <script>
+    const orbField = document.getElementById("orbField");
+    const overlay = document.getElementById("reflectionOverlay");
+    const reflectionForm = document.getElementById("reflectionForm");
+    const thankYouNote = document.getElementById("thankYouNote");
+    const thoughtForm = document.getElementById("thoughtForm");
+    const selectedOrb = document.getElementById("selectedOrb");
+    const reflectionTitle = document.getElementById("reflectionTitle");
+    const whyInput = document.getElementById("whyInput");
+    const feelingInput = document.getElementById("feelingInput");
+    const closeButton = document.getElementById("closeButton");
+    const returnButton = document.getElementById("returnButton");
+
+    const orbColors = [
+      { name: "pink", color: "#ff7ecb", light: "#ffd7f1", dark: "#a52e83", glow: "#ff72d0" },
+      { name: "blue", color: "#62c9ff", light: "#d7f5ff", dark: "#2471c7", glow: "#57c8ff" },
+      { name: "yellow", color: "#ffe66d", light: "#fff8c7", dark: "#d99525", glow: "#ffe36e" },
+      { name: "purple", color: "#b78aff", light: "#eadbff", dark: "#6940c5", glow: "#b78aff" },
+      { name: "green", color: "#75f0ad", light: "#dcffe7", dark: "#249b69", glow: "#75f0ad" },
+      { name: "orange", color: "#ffad72", light: "#ffe4c8", dark: "#d45d35", glow: "#ffad72" },
+      { name: "red", color: "#ff7b86", light: "#ffdce0", dark: "#ba354f", glow: "#ff7b86" },
+      { name: "teal", color: "#6de9dc", light: "#d9fffb", dark: "#208e9b", glow: "#6de9dc" },
+      { name: "lavender", color: "#d4a6ff", light: "#f2e2ff", dark: "#9563cc", glow: "#d4a6ff" },
+      { name: "peach", color: "#ffbeaa", light: "#ffebe1", dark: "#d96f73", glow: "#ffbeaa" }
+    ];
+
+    const orbCount = 65;
+
+    function createOrbs() {
+      for (let i = 0; i < orbCount; i++) {
+        const orb = document.createElement("button");
+        const palette = orbColors[i % orbColors.length];
+        const size = Math.floor(Math.random() * 31) + 17;
+
+        orb.type = "button";
+        orb.className = "emotion-orb";
+        orb.setAttribute("aria-label", "Choose a " + palette.name + " orb");
+
+        orb.style.setProperty("--left", Math.random() * 96 + "%");
+        orb.style.setProperty("--top", Math.random() * 91 + "%");
+        orb.style.setProperty("--size", size + "px");
+        orb.style.setProperty("--duration", (Math.random() * 5 + 5) + "s");
+        orb.style.setProperty("--delay", (Math.random() * -10) + "s");
+        orb.style.setProperty("--orb-color", palette.color);
+        orb.style.setProperty("--light", palette.light);
+        orb.style.setProperty("--dark", palette.dark);
+        orb.style.setProperty("--glow", palette.glow);
+
+        orb.addEventListener("click", () => {
+          openReflection(palette);
+        });
+
+        orbField.appendChild(orb);
+      }
+    }
+
+    function openReflection(palette) {
+      selectedOrb.style.setProperty("--selected-color", palette.color);
+      selectedOrb.style.setProperty("--selected-light", palette.light);
+      selectedOrb.style.setProperty("--selected-dark", palette.dark);
+      selectedOrb.style.setProperty("--selected-glow", palette.glow);
+
+      reflectionTitle.textContent = "you chose a " + palette.name + " orb";
+
+      thoughtForm.reset();
+      reflectionForm.classList.remove("is-hidden");
+      thankYouNote.classList.remove("is-visible");
+
+      overlay.classList.add("is-open");
+      document.body.style.overflow = "hidden";
+
+      setTimeout(() => whyInput.focus(), 100);
+    }
+
+    function closeReflection() {
+      overlay.classList.remove("is-open");
+      document.body.style.overflow = "";
+      thoughtForm.reset();
+      reflectionForm.classList.remove("is-hidden");
+      thankYouNote.classList.remove("is-visible");
+    }
+
+    thoughtForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      if (!thoughtForm.reportValidity()) return;
+
+      // Answers are intentionally not stored or sent anywhere.
+      reflectionForm.classList.add("is-hidden");
+      thankYouNote.classList.add("is-visible");
+      returnButton.focus();
+    });
+
+    closeButton.addEventListener("click", closeReflection);
+    returnButton.addEventListener("click", closeReflection);
+
+    overlay.addEventListener("click", (event) => {
+      if (event.target === overlay) closeReflection();
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && overlay.classList.contains("is-open")) {
+        closeReflection();
+      }
+    });
+
+    createOrbs();
+  </script>
+
+</body>
+</html>
